@@ -11,9 +11,9 @@ def get_results():
     query_dict = request.args.to_dict(flat=False)
     req = f"{query_dict['requesting'][0]}"
 
-    #If Details requested
+    # If Details requested
     if req == "details":
-        #Example request: https://170fr34z82.execute-api.us-east-1.amazonaws.com/Dev?requesting=details&latitude=13.100120&longitude=77.596350&query=electronic&limit=2
+        # Example request: https://170fr34z82.execute-api.us-east-1.amazonaws.com/Dev?requesting=details&latitude=13.100120&longitude=77.596350&query=electronic&limit=2
         # Store the required parameters in variables
         latitude = f"{query_dict['latitude'][0]}"
         longitude = f"{query_dict['longitude'][0]}"
@@ -35,6 +35,15 @@ def get_results():
             for item in data_disco['items']:
                 title = item['title']
                 address = item['address']['label']
+                print(address)
+                # Find the first comma
+                comma_index = address.find(",")
+                # Extract the substring after the comma
+                address_without_prefix = address[comma_index + 1:]
+                address = address_without_prefix
+                print(address)
+
+                address = address.replace(",","\n")
                 latitude = item['position']['lat']
                 longitude = item['position']['lng']
 
@@ -99,9 +108,9 @@ def get_results():
             json_data = json.dumps(data)
             return Response(json_data, status=400, mimetype='application/json')
 
-    #If user location requested
+    # If user location requested
     elif req == "location":
-        #Example request: https://170fr34z82.execute-api.us-east-1.amazonaws.com/Dev?requesting=location&latitude=13.100120&longitude=77.596350
+        # Example request: https://170fr34z82.execute-api.us-east-1.amazonaws.com/Dev?requesting=location&latitude=13.100120&longitude=77.596350
         # Store the required parameters in variables
         query_dict = request.args.to_dict(flat=False)
         latitude = f"{query_dict['latitude'][0]}"
@@ -125,8 +134,53 @@ def get_results():
             json_data = json.dumps(data)
             return Response(json_data, status=200, mimetype='application/json')
 
+    #If user reviews or images are required
+    elif req == "reviews":
+        latitude = f"{query_dict['latitude'][0]}"
+        longitude = f"{query_dict['longitude'][0]}"
+        query = f"{query_dict['query'][0]}"
+        headers = {
+            "X-RapidAPI-Key": rapid_api_key,
+            "X-RapidAPI-Host": "local-business-data.p.rapidapi.com"
+        }
+
+        search_url = "https://local-business-data.p.rapidapi.com/search"
+        reviews_url = "https://local-business-data.p.rapidapi.com/business-reviews"
+
+        querystring = {"query": query,  # address of shop with name or Title
+                       "limit": "1", "lat": latitude, "lng": longitude, "zoom": "13", "language": "en",
+                       "region": "ind"}
+
+        search_response = requests.get(search_url, headers=headers, params=querystring)
+
+        data = search_response.json()
+        business_id = data["data"][0]["business_id"]
+        data_response = data["data"]
+        rating = data["data"][0]["rating"]
+        photo = data["data"][0]["photos_sample"][0]["photo_url_large"]
+
+        review_string = {f"business_id": business_id, "limit": "10", "region": "ind", "language": "en"}
+        review_response = requests.get(reviews_url, headers=headers, params=review_string)
+
+        review_data = review_response.json()
+
+        if 'data' in review_data and review_data['data']:
+            reviews_list = []
+            for review in review_data['data']:
+                review_text = review.get('review_text', 'No review text available')
+                reviews_list.append(review_text)
+        else:
+            reviews_list = ["No reviews available"]
+
+        response = {"Rating": f"{rating}", "business_id": f"{business_id}", "photo": f"{photo}", "reviews": reviews_list}
+        response = json.dumps(response, indent=4)
+        data = json.loads(response)
+        json_data = json.dumps(data)
+        return Response(json_data, status=200, mimetype='application/json')
+
+
     else:
-        #If the request format is invalid
+        # If the request format is invalid
         response = {"Error": "Invalid request. Check again."}
 
         response = json.dumps(response, indent=4)
@@ -144,42 +198,5 @@ def lambda_handler(event, context):
 if __name__ == '__main__':
     app.run()
 
-
-import requests
-
-
-headers = {
-    "X-RapidAPI-Key": "73a1dc7d81msh330b3a9c23cb99dp13f4a1jsnc0618f6e29aa",
-    "X-RapidAPI-Host": "local-business-data.p.rapidapi.com"
-}
-
-search_url = "https://local-business-data.p.rapidapi.com/search"
-reviews_url = "https://local-business-data.p.rapidapi.com/business-reviews"
-
-querystring = {"query": #address of shop with name ,
-               "limit": "1", "lat": latitude , "lng": longitude , "zoom": "13", "language": "en", "region": "ind"}
-
-search_response = requests.get(search_url, headers=headers, params=querystring)
-
-data = search_response.json()
-business_id = data["data"][0]["business_id"]
-data_response = data["data"]
-rating = data["data"][0]["rating"]
-photo = data["data"][0]["photos_sample"][0]["photo_url_large"]
-
-
-
-
-review_string = {f"business_id": business_id, "limit": "10", "region": "ind", "language": "en"}
-review_response = requests.get(reviews_url, headers=headers, params=review_string)
-
-review_data = review_response.json()
-
-if 'data' in review_data and review_data['data']:
-    
-    for review in review_data['data']:
-        review_text = review.get('review_text', 'No review text available')
-        print(f"Review Text: {review_text}")
-else:
-    print("No review data found in the response.")
+############
 
