@@ -173,7 +173,7 @@ LocaleXplorer is proudly prepared by team HackZilla :
    
 - Kedar Bhagat :  - [![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/Kedarbhagat)
 		  - [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/kedar-bhagat-b65300284/)
-  https://github.com/
+  
  
 ## Screenshots
 
