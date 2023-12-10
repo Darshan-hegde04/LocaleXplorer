@@ -143,3 +143,43 @@ def lambda_handler(event, context):
 
 if __name__ == '__main__':
     app.run()
+
+
+import requests
+
+
+headers = {
+    "X-RapidAPI-Key": "73a1dc7d81msh330b3a9c23cb99dp13f4a1jsnc0618f6e29aa",
+    "X-RapidAPI-Host": "local-business-data.p.rapidapi.com"
+}
+
+search_url = "https://local-business-data.p.rapidapi.com/search"
+reviews_url = "https://local-business-data.p.rapidapi.com/business-reviews"
+
+querystring = {"query": #address of shop with name ,
+               "limit": "1", "lat": latitude , "lng": longitude , "zoom": "13", "language": "en", "region": "ind"}
+
+search_response = requests.get(search_url, headers=headers, params=querystring)
+
+data = search_response.json()
+business_id = data["data"][0]["business_id"]
+data_response = data["data"]
+rating = data["data"][0]["rating"]
+photo = data["data"][0]["photos_sample"][0]["photo_url_large"]
+
+
+
+
+review_string = {f"business_id": business_id, "limit": "10", "region": "ind", "language": "en"}
+review_response = requests.get(reviews_url, headers=headers, params=review_string)
+
+review_data = review_response.json()
+
+if 'data' in review_data and review_data['data']:
+    
+    for review in review_data['data']:
+        review_text = review.get('review_text', 'No review text available')
+        print(f"Review Text: {review_text}")
+else:
+    print("No review data found in the response.")
+
