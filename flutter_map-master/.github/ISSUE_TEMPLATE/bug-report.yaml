@@ -1,0 +1,73 @@
+name: Bug Report
+description: Create a bug report to help us improve
+title: "[BUG] <title>"
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "
+        # Bug Report
+
+        Thanks for taking the time to fill out this bug report! To help us verify the issue quicker, please include as much information as you can.
+        
+        
+        ---
+        
+        
+        Before reporting a bug, please:
+
+        * Check if there is already an open or closed issue that is similar to yours
+        
+        * Ensure that you have fully read the documentation (both the website and API docs) that pertains to the function you're having problems with
+
+        * Ensure that your Flutter environment is correctly installed & set-up
+
+        * Remember that we're volunteers trying our best to help, so please be polite
+        
+        
+        ---
+        "
+  - type: textarea
+    id: details
+    attributes:
+      label: What is the bug?
+      description: What were you implementing when you found this issue? What happens when the bug triggers? What do you think should have happened instead? Please include as much detail as possible, including screenshots and screen-recordings if you can.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How can we reproduce it?
+      description: |
+        Please include a fully formatted [minimal reproducible example](https://en.wikipedia.org/wiki/Minimal_reproducible_example) wrapped in a [Dart code block](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#syntax-highlighting), otherwise, detail the exact steps to reproduce this issue.
+        If you do not include any information here, it will take longer for us to verify your issue.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Do you have a potential solution?
+      description: "If so, please detail it: it will make it quicker for us to fix the issue."
+  - type: markdown
+    attributes:
+      value: ---
+  - type: input
+    id: platform
+    attributes:
+      label: Platforms
+      description: Please detail the devices and operating systems you can reproduce this bug on, separated by commas.
+      placeholder: eg. Android 13 (Samsung Galaxy S99), Windows 11 (x64)
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How much of a problem is this issue, when it does occur?
+      options:
+        - "Minimum: Allows normal functioning"
+        - "Obtrusive: Prevents normal functioning but causes no errors in the console"
+        - "Erroneous: Prevents normal functioning and causes errors in the console"
+        - "Fatal: Causes the application to crash"
+    validations:
+      required: true
