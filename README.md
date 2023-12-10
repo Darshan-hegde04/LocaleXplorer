@@ -72,10 +72,8 @@ LocaleXplorer acts as a bridge between users and local businesses, offering real
 		- revgeocode
 		- search
   	- Rapid api (Local market place)
-  		- search
-  	 	-  
-  	     
-  
+
+	
 ## How LocaleXplorer Work's ?
 
 LocalXplorer operates through a combination of cutting-edge technologies and seamless integration, offering users an immersive exploration experience. Here's a breakdown of how LocalXplorer works:
@@ -110,7 +108,7 @@ Before using LocaleXplorer, ensure you have the following prerequisites:
 
 - Python installed on your computer (for backend development).
 - Flutter installed for mobile app development.
-- Access to HERE Places API and SDKs.
+- Access to  API and SDKs.
 
 ### Installation
 1. **Clone the Repository:**
@@ -129,8 +127,8 @@ Before using LocaleXplorer, ensure you have the following prerequisites:
    - Navigate to the Flutter project directory.
    - Run `flutter pub get` to install dependencies.
 
-5. **HERE API Integration:**
-   - Obtain API keys for HERE Places API.
+5. **API Integration:**
+   - Obtain API keys .
    - Configure API keys in the project.
 
 ## How to Use
@@ -165,10 +163,20 @@ Before using LocaleXplorer, ensure you have the following prerequisites:
 
 LocaleXplorer is proudly prepared by team HackZilla :
 
--  Darshan Hegde : ![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/Darshan-hegde04)[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/darshan-hegde-050b8625a)[
--  Akshay Kumar :  ![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)][![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)
--  K S Prateek :  ![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)(https://github.com/imksprateek)
-- Kedar Bhagat :  ![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)https://github.com/Kedarbhagat
-
+-  Darshan Hegde :  - [![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/Darshan-hegde04)
+		    - [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/darshan-hegde-050b8625a/)
+-  Akshay Kumar :   - [![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/MRMORNINGSTAR2233)
+		    - [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/akshay-kumar-hegde-b844b5253/)
+  
+-  K S Prateek :   - [![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/imksprateek)
+		   - [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/imksprateek/)
+   
+- Kedar Bhagat :  - [![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/Kedarbhagat)
+		  - [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/kedar-bhagat-b65300284/)
+  https://github.com/
+ 
 ## Screenshots
+
+![Homepage ](https://github.com/Darshan-hegde04/LocaleXplorer/assets/149821544/64ee4c0c-c069-4dd5-9f14-e782a34361a6)
+![cafe](https://github.com/Darshan-hegde04/LocaleXplorer/assets/149821544/ea5663ba-00ea-4f63-93ad-68589e90e5aa)
 
